@@ -9,9 +9,8 @@ RuboCop::RakeTask.new(:lint) do |task|
 end
 
 task :run do
-  ruby 'lib/cool_program.rb'
 end
 
 task :test do
-  ruby 'test/cool_program_test.rb'
+  ruby 'test/day/1/sonar_sweep_test.rb'
 end
