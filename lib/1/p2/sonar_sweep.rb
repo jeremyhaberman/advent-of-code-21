@@ -4,21 +4,14 @@ class SonarSweep
 
   def self.measurement_window_sums(measurements)
     windows = self.measurement_windows(measurements)
-    windows.map { |w| w.sum  }
+    windows.map(&:sum)
   end
 
   def self.measurement_windows(measurements)
-    return [] if measurements.length < 3
-
-    first = 0
-    windows = []
-
-    while first + 2 < measurements.length
-      windows << [measurements[first], measurements[first+1], measurements[first+2]]
-      first += 1
+    measurements.each_index.reduce([]) do |result, index|
+      [] if index < 2
+      result << [measurements[index-2], measurements[index-1], measurements[index]]
     end
-    
-    windows
   end
 
   def self.count_increases(measurements)
