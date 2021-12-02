@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SonarSweep
+class SonarSweepV1
   def self.count_increases(measurements)
     count = 0
     measurements.each_with_index do |measurement, index|
