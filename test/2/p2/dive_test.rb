@@ -2,7 +2,7 @@
 
 require 'pry'
 require 'minitest/autorun'
-require_relative '../../../lib/day/2/dive'
+require_relative '../../../lib/2/p2/dive'
 
 class DiveTest < Minitest::Test
 

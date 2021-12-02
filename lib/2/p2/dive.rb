@@ -2,8 +2,6 @@
 
 class Dive
 
-  STARTING_POSITION = { horizontal: 0, depth: 0, aim: 0 }
-
   # @param instructions List of instructions. Example:
   #   ["forward 2", "down 3", "up 1", "forward 4", "down 2"]
   def self.get_product(instructions)
@@ -12,7 +10,7 @@ class Dive
   end
 
   def self.get_position(instructions)
-    instructions.reduce(STARTING_POSITION) do |position, instruction|
+    instructions.reduce({ horizontal: 0, depth: 0, aim: 0 }) do |position, instruction|
       motion, units = instruction.split
       units = units.to_i
       

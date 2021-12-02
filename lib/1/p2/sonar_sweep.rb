@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SonarSweepV2
+class SonarSweep
 
   def self.measurement_window_sums(measurements)
     windows = self.measurement_windows(measurements)
