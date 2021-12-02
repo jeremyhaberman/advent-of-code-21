@@ -11,4 +11,8 @@ class SonarSweep
     end
     count
   end
+
+  def self.parse_measurements(file)
+    file.readlines.map(&:to_i)
+  end
 end

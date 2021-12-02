@@ -1,6 +1,6 @@
 require 'rubocop/rake_task'
 
-task default: %w[lint test]
+task default: %w[test]
 
 RuboCop::RakeTask.new(:lint) do |task|
   task.patterns = ['lib/**/*.rb', 'test/**/*.rb']
@@ -8,7 +8,8 @@ RuboCop::RakeTask.new(:lint) do |task|
   task.options = ['--auto-correct']
 end
 
-task :run do
+task :day1 do
+  ruby 'lib/day/1/sonar_sweeper.rb'
 end
 
 task :test do
