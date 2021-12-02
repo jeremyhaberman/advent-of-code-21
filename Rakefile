@@ -14,4 +14,5 @@ end
 
 task :test do
   ruby 'test/day/1/sonar_sweep_test.rb'
+  ruby 'test/day/2/sonar_sweep_test.rb'
 end
