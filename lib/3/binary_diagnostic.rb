@@ -2,29 +2,17 @@
 
 class BinaryDiagnostic
 
-  def self.most_common_bit(bits)
-    counts = bits.reduce({ zeros: 0, ones: 0 }) do |counts, bit|
-      if bit == "0"
-        counts[:zeros] += 1
-      else
-        counts[:ones] += 1
-      end
-      counts
-    end
-
-    counts[:zeros] > counts[:ones] ? "0" : "1"
+  # @param report [Array] of strings representing binary numbers
+  #   e.g. ["00100", "11110"]
+  def self.gamma_rate(report)
   end
 
-  def self.most_common_bits(numbers)
-    
+  private
 
-
-    
-    numbers.each.reduce([]) do |memo, number|
-      number.split('')
-
-      end
-    end
-    p numbers
+  # Determines the most common bit in an arra of bits
+  # @param bits [Array] of strings, each representing one bit
+  def self.most_common_bit(bits)
+    num_zeros = bits.filter { |b| b == "0" }.length
+    num_zeros > bits.length / 2.0 ? "0" : "1"
   end
 end
