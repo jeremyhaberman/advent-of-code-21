@@ -115,4 +115,18 @@ class BinaryDiagnosticTest < Minitest::Test
     end
   end
 
+  describe "final" do
+    it "should return 4160394 for part 1" do
+      input = File.readlines("lib/3/input.txt", chomp: true)
+      answer = BinaryDiagnostic.power_consumption(input)
+      assert_equal 4160394, answer
+    end
+    
+    it "should return 4125600 for part 2" do
+      input = File.readlines("lib/3/input.txt", chomp: true)
+      answer = BinaryDiagnostic.life_support_rating(input)
+      assert_equal 4125600, answer
+    end
+  end
+
 end
