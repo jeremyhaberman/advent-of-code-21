@@ -24,6 +24,40 @@ class BinaryDiagnostic
     self.gamma_rate(report) * self.epsilon_rate(report)
   end
 
+  def self.oxygen_generator_rating(report, important_bit: 0)
+    mcb = self.most_common_bit_at_index(report, important_bit)
+    if mcb.nil?
+      mcb = 1
+    end
+
+    matching_numbers = report.filter { |number| number[important_bit] == mcb }
+    
+    if matching_numbers.length == 1
+      matching_numbers[0].to_i(2)
+    else
+      self.oxygen_generator_rating(matching_numbers, important_bit: important_bit + 1)
+    end
+  end
+
+  def self.co2_scrubber_rating(report, important_bit: 0)
+    lcb = self.least_common_bit_at_index(report, important_bit)
+    if lcb.nil?
+      lcb = 0
+    end
+
+    matching_numbers = report.filter { |n| n[important_bit].to_i == lcb }
+    
+    if matching_numbers.length == 1
+      matching_numbers[0].to_i(2)
+    else
+      self.co2_scrubber_rating(matching_numbers, important_bit: important_bit + 1)
+    end
+  end
+
+  def self.life_support_rating(report)
+    self.oxygen_generator_rating(report) * self.co2_scrubber_rating(report)
+  end
+
   private
 
   def self.to_bits(report)
@@ -38,7 +72,35 @@ class BinaryDiagnostic
     bits
   end
 
-  # Determines the most common bit in an arra of bits
+  def self.to_first_bits(report)
+    report.map { |n| n[0] }
+  end
+
+  def self.most_common_bit_at_index(numbers, index)
+    bits_at_index = numbers.map { |n| n[index] }
+    self.most_common_bit(bits_at_index)
+  end
+
+  def self.least_common_bit_at_index(numbers, index)
+    bits_at_index = numbers.map { |n| n[index].to_i }
+    bit_counts = bits_at_index.each_with_object([0, 0]) do |b, obj|
+      obj[b] += 1
+    end
+
+    lcb = nil
+    if bit_counts[0] < bit_counts[1]
+      lcb = 0
+    elsif bit_counts[0] > bit_counts[1]
+      lcb = 1
+    end
+    lcb
+  end
+
+  def self.most_common_first_bit(bits)
+    self.most_common_bit(bits.map { |b| b[0] })
+  end
+
+  # Determines the most common bit in an array of bits
   # @param bits [Array] of strings, each representing one bit
   def self.most_common_bit(bits)
     num_zeros = bits.filter { |b| b == "0" }.length
