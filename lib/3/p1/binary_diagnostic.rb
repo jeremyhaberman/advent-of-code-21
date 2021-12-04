@@ -87,13 +87,11 @@ class BinaryDiagnostic
       obj[b] += 1
     end
 
-    lcb = nil
-    if bit_counts[0] < bit_counts[1]
-      lcb = 0
+    return if bit_counts[0] < bit_counts[1]
+      0
     elsif bit_counts[0] > bit_counts[1]
-      lcb = 1
+      1
     end
-    lcb
   end
 
   def self.most_common_first_bit(bits)
