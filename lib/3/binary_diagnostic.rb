@@ -5,6 +5,10 @@ class BinaryDiagnostic
   # @param report [Array] of strings representing binary numbers
   #   e.g. ["00100", "11110"]
   def self.gamma_rate(report)
+    # most common bit of first bit
+    first_bits = report.map { |num| num[0] }
+    puts first_bits
+    # most common bit of second bit
   end
 
   private
