@@ -13,6 +13,17 @@ class BinaryDiagnostic
       to_i(2)
   end
 
+  def self.epsilon_rate(report)
+    self.to_bits(report).
+      map { |num_as_bits| self.least_common_bit(num_as_bits) }.
+      reduce("") { |binary_number, bit| binary_number += bit }.
+      to_i(2)
+  end
+
+  def self.power_consumption(report)
+    self.gamma_rate(report) * self.epsilon_rate(report)
+  end
+
   private
 
   def self.to_bits(report)
@@ -32,5 +43,10 @@ class BinaryDiagnostic
   def self.most_common_bit(bits)
     num_zeros = bits.filter { |b| b == "0" }.length
     num_zeros > bits.length / 2.0 ? "0" : "1"
+  end
+
+  def self.least_common_bit(bits)
+    most_common_bit = self.most_common_bit(bits)
+    most_common_bit == "0" ? "1" : "0"
   end
 end
