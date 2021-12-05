@@ -33,7 +33,7 @@ class BinaryDiagnostic
   def self.oxygen_generator_rating(report, important_bit: 0)
     numbers = numbers_with_most_common_bit_at_index(report, important_bit)
     if numbers.length == 1
-      numbers[0].to_i(2)
+      numbers.first.to_i(2)
     else
       self.oxygen_generator_rating(numbers, important_bit: important_bit + 1)
     end
@@ -42,7 +42,7 @@ class BinaryDiagnostic
   def self.co2_scrubber_rating(report, important_bit: 0)
     numbers = numbers_with_least_common_bit_at_index(report, important_bit)
     if numbers.length == 1
-      numbers[0].to_i(2)
+      numbers.first.to_i(2)
     else
       self.co2_scrubber_rating(numbers, important_bit: important_bit + 1)
     end
