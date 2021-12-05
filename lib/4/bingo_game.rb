@@ -7,6 +7,11 @@ class BingoGame
   def initialize(game_input)
     @game = game_input
     @number_order = parse_number_order(game_input)
+    @number_iterator = @number_order.each
+  end
+
+  def next_number
+    @number_iterator.next
   end
 
   private
