@@ -50,18 +50,6 @@ class BinaryDiagnostic
 
   private
 
-  def self.numbers_with_most_common_bit_at_index(report, index)
-    report.filter do |number|
-      number[index] == self.most_common_bit_at_index(report, index)
-    end
-  end
-
-  def self.numbers_with_least_common_bit_at_index(report, index)
-    report.filter do |number|
-      number[index] == self.least_common_bit_at_index(report, index)
-    end
-  end
-
   def self.most_common_bit_at_index(numbers, index)
     bit_counts = self.bit_counts(numbers, index)
     bit_counts[1] >= bit_counts[0] ? "1" : "0"
@@ -76,6 +64,18 @@ class BinaryDiagnostic
     bits_at_index = numbers.map { |n| n[index].to_i }
     bit_counts = bits_at_index.each_with_object([0, 0]) do |bit, array|
       array[bit] += 1
+    end
+  end
+
+  def self.numbers_with_most_common_bit_at_index(numbers, index)
+    numbers.filter do |number|
+      number[index] == self.most_common_bit_at_index(numbers, index)
+    end
+  end
+
+  def self.numbers_with_least_common_bit_at_index(numbers, index)
+    numbers.filter do |number|
+      number[index] == self.least_common_bit_at_index(numbers, index)
     end
   end
 end
