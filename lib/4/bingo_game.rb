@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './card'
+
 # Day 4
 class BingoGame
   attr_reader :number_order, :cards
@@ -11,8 +13,10 @@ class BingoGame
     @cards = parse_cards(game_input)
   end
 
-  def next_number
-    @number_iterator.next
+  def draw_number
+    number = @number_iterator.next
+    @cards.each { |c| c.mark(number) }
+    number
   end
 
   private
@@ -26,5 +30,6 @@ class BingoGame
       .each_slice(6)
       .map { |slice| slice[1..].map(&:strip) }
       .map { |card| card.map { |row| row.split.map(&:to_i) } }
+      .map { |card_data| Card.new(card_data) }
   end
 end
