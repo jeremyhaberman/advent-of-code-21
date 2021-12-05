@@ -15,12 +15,9 @@ class BingoGameTest < Minitest::Test
                         16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1]
       assert_equal expected_order, @game.number_order
     end
+  end
 
-    it 'should draw numbers' do
-      assert_equal 7, @game.next_number
-      assert_equal 4, @game.next_number
-    end
-
+  describe '#next_number' do
     it 'should draw all the numbers and raise StopIteration at the end' do
       game = BingoGame.new(['1, 2, 3'])
       assert_equal 1, game.next_number
