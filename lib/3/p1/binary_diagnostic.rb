@@ -31,21 +31,15 @@ class BinaryDiagnostic
   end
 
   def self.oxygen_generator_rating(report, important_bit: 0)
+    return report.first.to_i(2) if report.length == 1
     numbers = numbers_with_most_common_bit_at_index(report, important_bit)
-    if numbers.length == 1
-      numbers.first.to_i(2)
-    else
-      self.oxygen_generator_rating(numbers, important_bit: important_bit + 1)
-    end
+    self.oxygen_generator_rating(numbers, important_bit: important_bit + 1)
   end
 
   def self.co2_scrubber_rating(report, important_bit: 0)
+    return report.first.to_i(2) if report.length == 1
     numbers = numbers_with_least_common_bit_at_index(report, important_bit)
-    if numbers.length == 1
-      numbers.first.to_i(2)
-    else
-      self.co2_scrubber_rating(numbers, important_bit: important_bit + 1)
-    end
+    self.co2_scrubber_rating(numbers, important_bit: important_bit + 1)
   end
 
   private
