@@ -52,5 +52,15 @@ class CardTest < Minitest::Test
       assert_equal [[0, 0], [0, 3], [3, 3]], @card.marked_positions
       assert_equal [3, 2, 24], @card.marked_numbers
     end
+
+    it 'should return unmarked numbers' do
+      [3, 15, 0, 22].each { |n| @card.mark(n)}
+      [9, 18, 13, 5].each { |n| @card.mark(n)}
+      [19, 8, 7,  23].each { |n| @card.mark(n)}
+      [20, 11, 10, 4].each { |n| @card.mark(n)}
+      [14, 21, 16, 6].each { |n| @card.mark(n)}
+
+      assert_equal [2, 17, 25, 24, 12], @card.unmarked_numbers
+    end
   end
 end
