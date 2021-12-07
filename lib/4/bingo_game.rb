@@ -21,9 +21,6 @@ class BingoGame
   end
 
   def score(card)
-    puts "unmarked: #{card.unmarked_numbers}"
-    puts "sum: #{card.unmarked_numbers.sum}"
-    puts "last: #{@last_number}"
     card.unmarked_numbers.sum * @last_number
   end
 
