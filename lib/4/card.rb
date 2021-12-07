@@ -40,6 +40,12 @@ class Card
     end
   end
 
+  def unmarked_numbers
+    @numbers.each_with_object([]) do |(_k, v), marked|
+      marked << v[0] unless v[1]
+    end
+  end
+
   def winner?
     # check rows
     (0..4).each do |row_index|

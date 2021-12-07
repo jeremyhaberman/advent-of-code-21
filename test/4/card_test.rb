@@ -54,13 +54,15 @@ class CardTest < Minitest::Test
     end
 
     it 'should return unmarked numbers' do
-      [3, 15, 0, 22].each { |n| @card.mark(n)}
-      [9, 18, 13, 5].each { |n| @card.mark(n)}
-      [19, 8, 7,  23].each { |n| @card.mark(n)}
-      [20, 11, 10, 4].each { |n| @card.mark(n)}
-      [14, 21, 16, 6].each { |n| @card.mark(n)}
+      [3, 15, 0, 2, 22, 5, 11, 12].each { |n| @card.mark(n)}
+      expected = [9, 18, 13, 17, 19, 8, 7, 25, 23, 20, 10, 24, 4, 14, 21, 16, 6]
+      assert_equal expected, @card.unmarked_numbers  
+    end
 
-      assert_equal [2, 17, 25, 24, 12], @card.unmarked_numbers
+    it 'should return score' do
+      [3, 15, 0, 2, 22, 5, 11, 12].each { |n| @card.mark(n)}
+      expected = [9, 18, 13, 17, 19, 8, 7, 25, 23, 20, 10, 24, 4, 14, 21, 16, 6]
+      assert_equal expected, @card.unmarked_numbers  
     end
   end
 end

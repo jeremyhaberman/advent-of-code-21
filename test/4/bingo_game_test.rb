@@ -81,6 +81,16 @@ class BingoGameTest < Minitest::Test
         @game.draw_number
         assert third_board.winner?
       end
+
+      it 'should return the score of the winning card' do
+        12.times { @game.draw_number }
+        assert_equal 4512, @game.score(@game.cards[2])
+      end
+
+      it 'should identify the winner' do
+        winners = @game.play_to_win
+        assert_equal [@game.cards[2]], winners
+      end
     end
   end
 end

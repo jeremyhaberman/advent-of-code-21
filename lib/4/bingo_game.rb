@@ -16,7 +16,24 @@ class BingoGame
   def draw_number
     number = @number_iterator.next
     @cards.each { |c| c.mark(number) }
+    @last_number = number
     number
+  end
+
+  def score(card)
+    card.unmarked_numbers.sum * @last_number
+  end
+
+  def play_to_win
+    loop do
+      draw_number
+      break if winners.any?
+    end
+    winners
+  end
+
+  def winners
+    @cards.filter { |c| c.winner? }
   end
 
   private
