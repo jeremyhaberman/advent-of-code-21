@@ -25,32 +25,32 @@ class BingoGameTest < Minitest::Test
         assert @game.cards.first.is_a?(Card)
       end
 
-      it 'should parse cards' do
-        first = [
-          [22, 13, 17, 11, 0],
-          [8, 2, 23, 4, 24],
-          [21, 9, 14, 16, 7],
-          [6, 10, 3, 18, 5],
-          [1, 12, 20, 15, 19]
-        ]
-        assert_equal first, @game.cards.first.numbers
-
-        second = [
-          [3, 15, 0, 2, 22],
-          [9, 18, 13, 17, 5],
-          [19, 8, 7, 25, 23],
-          [20, 11, 10, 24, 4],
-          [14, 21, 16, 12, 6]]
-        assert_equal second, @game.cards[1].numbers
-
-        third = [
-          [14, 21, 17, 24, 4],
-          [10, 16, 15, 9, 19],
-          [18, 8, 23, 26, 20],
-          [22, 11, 13, 6, 5],
-          [2, 0, 12, 3, 7]]
-        assert_equal third, @game.cards[2].numbers
-      end
+      # it 'should parse cards' do
+      #   first = [
+      #     [22, 13, 17, 11, 0],
+      #     [8, 2, 23, 4, 24],
+      #     [21, 9, 14, 16, 7],
+      #     [6, 10, 3, 18, 5],
+      #     [1, 12, 20, 15, 19]
+      #   ]
+      #   assert_equal first, @game.cards.first.numbers
+      #
+      #   second = [
+      #     [3, 15, 0, 2, 22],
+      #     [9, 18, 13, 17, 5],
+      #     [19, 8, 7, 25, 23],
+      #     [20, 11, 10, 24, 4],
+      #     [14, 21, 16, 12, 6]]
+      #   assert_equal second, @game.cards[1].numbers
+      #
+      #   third = [
+      #     [14, 21, 17, 24, 4],
+      #     [10, 16, 15, 9, 19],
+      #     [18, 8, 23, 26, 20],
+      #     [22, 11, 13, 6, 5],
+      #     [2, 0, 12, 3, 7]]
+      #   assert_equal third, @game.cards[2].numbers
+      # end
     end
 
     describe '#draw_number' do
@@ -66,9 +66,20 @@ class BingoGameTest < Minitest::Test
 
       it 'should mark number on cards' do
         @game.draw_number
-        assert_equal [[2,4]], @game.cards.first.markers
-        assert_equal [[2,2]], @game.cards[1].markers
-        assert_equal [[4,4]], @game.cards[2].markers
+        assert_equal [[2,4]], @game.cards.first.marked_positions
+        assert_equal [[2,2]], @game.cards[1].marked_positions
+        assert_equal [[4,4]], @game.cards[2].marked_positions
+      end
+    end
+
+    describe '#winners' do
+      it 'should return the winner' do
+        11.times { @game.draw_number }
+        third_board = @game.cards[2]
+        refute third_board.winner?
+
+        @game.draw_number
+        assert third_board.winner?
       end
     end
   end
