@@ -92,5 +92,12 @@ class BingoGameTest < Minitest::Test
         assert_equal [@game.cards[2]], winners
       end
     end
+
+    describe '#last_card_to_win' do
+      it 'should return the last card to win' do
+        card = @game.last_card_to_win
+        assert @game.cards[1], card
+      end
+    end
   end
 end

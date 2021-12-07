@@ -21,6 +21,9 @@ class BingoGame
   end
 
   def score(card)
+    puts "unmarked: #{card.unmarked_numbers}"
+    puts "sum: #{card.unmarked_numbers.sum}"
+    puts "last: #{@last_number}"
     card.unmarked_numbers.sum * @last_number
   end
 
@@ -34,6 +37,22 @@ class BingoGame
 
   def winners
     @cards.filter { |c| c.winner? }
+  end
+
+  def last_card_to_win
+    loop do
+      draw_number
+      break if winners.length == @cards.length - 1
+    end
+
+    last_card = @cards.filter { |c| !winners.include?(c) }.first
+
+    loop do
+      draw_number
+      break if last_card.winner?
+    end
+
+    last_card
   end
 
   private
